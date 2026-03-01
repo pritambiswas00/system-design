@@ -1,0 +1,13 @@
+@baseUrl = http://localhost:5000
+@email = email@mail.com
+@password = password123
+@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImVtYWlsQG1haWwuY29tIiwiZXhwIjoxNzcyNDYyMTQ0LCJpYXQiOjE3NzIzNzU3NDQsImFkbWluIjp0cnVlfQ.d0ZMF3OohaFGsxetFv5PvBFGuFJtFJ9XFopFKQy3yOE
+@basicAuth = ZW1haWxAbWFpbC5jb206cGFzc3dvcmQxMjM=
+
+### Login (Basic Auth)
+POST {{baseUrl}}/login
+Authorization: Basic {{basicAuth}}
+
+### Validate JWT
+POST {{baseUrl}}/validate
+Authorization: Bearer {{jwt}} 

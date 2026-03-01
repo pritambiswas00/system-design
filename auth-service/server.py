@@ -35,10 +35,9 @@ def createJWT(username: str, secret: str, authz: bool) -> str:
 
 @server.route("/login", methods=["POST"])
 def login():
-    try:
-        auth = User.model_validate(request.authorization)
-    except ValidationError as e:
-        return f"Missing credentials: {e}", 401
+    auth = request.authorization
+    if not auth or not auth.username or not auth.password:
+        return "Missing credentials", 401
 
     cur = mysql.connection.cursor()
     row_count: int = cur.execute(
@@ -54,7 +53,7 @@ def login():
 
         email, password = user_row
 
-        if auth.email != email or auth.password != password:
+        if auth.username != email or auth.password != password:
             return "Invalid credentials", 401
 
         return createJWT(auth.username, os.getenv('JWT_SECRET', 'mysecret'), True)
