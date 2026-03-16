@@ -23,6 +23,22 @@ Simple authentication service built with Flask + MySQL.
 
 - Docker + Docker Compose
 
+## Local Python Setup (without Docker)
+
+`flask-mysqldb` depends on `mysqlclient`, which needs system headers.
+On Ubuntu/Debian, install these first:
+
+```bash
+sudo apt-get update
+sudo apt-get install -y python3-dev build-essential pkg-config default-libmysqlclient-dev
+```
+
+Then sync dependencies:
+
+```bash
+uv sync
+```
+
 ## Run Locally (Docker Compose)
 
 ```bash
